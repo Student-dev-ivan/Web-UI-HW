@@ -35,7 +35,7 @@ function menStillStanding(array) {
     cardsArray.forEach((item) => {
         let yellowCards = 0;
         let redCards = 0;
-        let player = item.substring(0, 2);
+        let player = item.substring(0, item.length - 1);
 
         for (let card of cardsArray) {
             card === `${player}Y` ? ++yellowCards : null;
