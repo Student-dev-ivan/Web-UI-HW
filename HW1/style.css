@@ -1,0 +1,14 @@
+body {
+    background-color: rgb(7, 31, 37);
+}
+
+h1, a, li {
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.box {
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 5%;
+}
