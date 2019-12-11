@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="./css/js.jpeg">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Demo 1</title>
+</head>
+
+<body>
+    <h1>DEMO 1</h1>
+    <div class="autoreset">
+        <span>Autoreset</span>
+        <input type="checkbox" id="autoreset">
+    </div>
+    <div class="buttons-container">
+        <div class="button">Chess board</div>
+        <div class="task">
+            <form id="form1">
+                <input placeholder="Height" type="text" name="height">
+                <input placeholder="Width" type="text" name="width">
+                <input placeholder="Symbol" type="text" name="symbol">
+                <input id="chess_apply" type="button" value="Apply">
+            </form>
+        </div>
+        <div class="button">Envelopes</div>
+        <div class="task">
+            <form id="form2">
+                <input placeholder="Side a" type="text" name="side a">
+                <input placeholder="Side b" type="text" name="side b">
+                <input placeholder="Side c" type="text" name="side c">
+                <input placeholder="Side d" type="text" name="side d">
+                <input id="envelopes_apply" type="button" value="Apply">
+            </form>
+        </div>
+        <div class="button">Triangles</div>
+        <div class="task">
+            <form id="form3">
+                <input style="order: 1;" placeholder="ABC" type="text" name="triangleName">
+                <input style="order: 3;" placeholder="DEF" type="text" name="triangleName">
+                <input style="order: 5;" placeholder="GHI" type="text" name="triangleName">
+                <input style="order: 2;" placeholder="Sides a,b,c" type="text" name="sides">
+                <input style="order: 4;" placeholder="Sides a,b,c" type="text" name="sides">
+                <input style="order: 6;" placeholder="Sides a,b,c" type="text" name="sides">
+                <input style="order: 7;" type="button" value="Apply" id="triangles_apply">
+            </form>
+        </div>
+        <div class="button">Palindrome</div>
+        <div class="task">
+            <form id="form4">
+                <input placeholder="Number" type="text" name="number">
+                <input type="button" value="Apply" id="palindrome_apply">
+            </form>
+        </div>
+        <div class="button">Lucky tickets</div>
+        <div class="task">
+            <form id="form5">
+                <input placeholder="From" type="text" name="From">
+                <input placeholder="To" type="text" name="number">
+                <input type="button" value="Apply" id="tickets_apply">
+            </form>
+        </div>
+        <div class="button">Num sequence</div>
+        <div class="task">
+            <form id="form6">
+                <input placeholder="Length" type="text" name="number">
+                <input placeholder="Min square" type="text" name="number">
+                <input type="button" value="Apply" id="sequence_apply">
+            </form>
+        </div>
+        <div class="button">Fibonacci</div>
+        <div class="task">
+            <form id="form7">
+                <h3>Choose one field to apply</h3>
+                <input placeholder="min,max" type="text" name="number">
+                <input placeholder="length" type="text" name="number">
+                <input type="button" value="Apply" id="fibonacci_apply">
+            </form>
+        </div>
+    </div>
+    <div class="output"></div>
+
+    <script type="module" src="./app/main.js"></script>
+</body>
+
+</html>

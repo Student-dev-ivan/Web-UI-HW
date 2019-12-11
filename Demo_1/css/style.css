@@ -1,0 +1,124 @@
+body {
+    user-select: none;
+    background-color: rgb(7, 31, 37);
+}
+
+.buttons-container {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-130%);
+}
+
+.button {
+    background-color: white;
+    border-radius: 15%;
+    font-size: 24px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 30px;
+    text-align: center;
+    width: 200px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: lightseagreen;
+}
+
+.task {
+    overflow: hidden;
+    height: 0;
+    border: lightseagreen 2px solid;
+    margin-bottom: 10px;
+    transition: height 1s ease;
+}
+
+input {
+    font-size: 16px;
+    text-align: center;
+    width: 160px;
+    height: 20px;
+}
+
+button {
+    font-size: 16px;
+    text-align: center;
+    width: 80px;
+    margin: 5px;
+}
+
+.task-shown {
+    height: 200px;
+}
+
+form {
+    display: grid;
+    height: inherit;
+    justify-items: center;
+    align-content: space-around;
+}
+
+#form3 {
+    display: grid;
+    height: inherit;
+    grid-template-columns: repeat(2, auto);
+    justify-items: center;
+}
+
+#form3>input {
+    font-size: 16px;
+    text-align: center;
+    width: 80px;
+    height: 20px;
+}
+
+#form3>[value=Apply] {
+    grid-column: 1/-1;
+}
+
+h3 {
+    background-color: white;
+    font-size: 1em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+}
+
+h1 {
+    position: absolute;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.output {
+    display: flex;
+    box-sizing: border-box;
+    position: absolute;
+    overflow: auto;
+    background-color: lightseagreen;
+    top: 18%;
+    left: 50%;
+    width: 370px;
+    height: 370px;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.autoreset {
+    position: absolute;
+    display: flex;
+    top: 12%;
+    left: 34%;
+    color: white;
+}
+
+#autoreset {
+    width: auto;
+    height: auto;
+}
