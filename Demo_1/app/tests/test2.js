@@ -27,6 +27,7 @@ export function test2(assert, expect) {
             const test = () => {
                 envelopesAnalysis({ a: -10000, b: -50000 }, { c: 6789, d: 40000 })
             };
+            expect(test).to.throw();
         });
     });
 }
