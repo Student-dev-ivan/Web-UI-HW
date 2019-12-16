@@ -8,6 +8,7 @@ export class ContorllerMovies {
         this.view = new ViewMovies();
         this.view.addSearchBtnListener(this.handleSearchBtnClick.bind(this));
         this.view.addDefaultBtnListener(this.handleDefaultBtnClick.bind(this));
+        this.view.addInputListener(this.handleEnterPress.bind(this));
     }
 
     handleSearchBtnClick() {
@@ -17,9 +18,9 @@ export class ContorllerMovies {
         }
     }
 
-    handleEnterPress() {
+    handleEnterPress(event) {
         const text = this.view.getInputText();
-        if (text !== '') {
+        if (text !== '' && event.keyCode === 13) {
             this.getMovies(text);
         }
     }

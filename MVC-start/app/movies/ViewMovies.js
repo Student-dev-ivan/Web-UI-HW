@@ -1,9 +1,12 @@
+import { Templater } from '../share/Templater.js'
+
 export class ViewMovies {
     constructor() {
         this.domMovies = document.querySelector('.movies');
         this.searchButton = document.querySelector('.btn__search');
         this.defaultButton = document.querySelector('.btn__default');
         this.input = document.querySelector('.form-control');
+        this.templater = new Templater('app/movies/templateMovie.dp180');
     }
     renderAllMovies(allMovies) {
         let moviesStr = '';
@@ -12,15 +15,22 @@ export class ViewMovies {
         });
         this.domMovies.innerHTML = moviesStr;
     }
+    prepareMovieData(movie) {
+        return Object.entries(movie).map(el => {
+            if (el[0] === 'overview') {
+                return {
+                    name: el[0],
+                    value: el[1].length > 90 ? el[1].substring(0, 90) + '...' : el[1]
+                }
+            }
+            return {
+                name: el[0],
+                value: el[1]
+            }
+        });
+    }
     renderMovie(movie) {
-        return `<div class="card mb-3 position-relative" style="width: 18rem;">
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" class="card-img-top" height=400px; alt="no image : (">
-        <div class="card-body">
-          <h5 class="card-title">${movie.original_title}</h5>
-          <p class="card-text">${movie.overview.length > 90 ? movie.overview.substring(0, 90) + '...' : movie.overview}</p>
-          <a href="https://www.themoviedb.org/movie/${movie.id}" class="btn btn-primary">Open</a>
-        </div>
-      </div>`;
+        return this.templater.getHTML(this.prepareMovieData(movie));
     }
 
     addSearchBtnListener(searchFunc) {
