@@ -3,7 +3,14 @@
 }
 
 .ui.card {
+    overflow: hidden;
     margin: 20px;
+    transition: transform 250ms ease-in-out;
+    transform: scale(1);
+}
+
+.ui.card:hover {
+    transform: scale(1.05);
 }
 
 .ui.card img {
@@ -11,6 +18,6 @@
     object-fit: cover;
 }
 
-div.root div.ui.card:first-child {
-    margin-top: 0 !important;
+div.root div.ui.card {
+    margin-top: 0;
 }
