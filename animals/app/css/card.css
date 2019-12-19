@@ -1,0 +1,16 @@
+.age {
+    margin-bottom: 15px;
+}
+
+.ui.card {
+    margin: 20px;
+}
+
+.ui.card img {
+    height: 250px;
+    width: auto;
+}
+
+div.root div.ui.card:first-child {
+    margin-top: 0 !important;
+}
