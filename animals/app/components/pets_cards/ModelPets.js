@@ -19,6 +19,7 @@ export class ModelPets {
                     res = res.filter((animal) => animal.breed.toLowerCase().includes(breed.toLowerCase()));
                 }
                 res.forEach(animal => animal.age = this.calculateAge(now, animal.birth_date));
+                // res.sort(() => Math.random() - Math.random());
                 this.animals = res;
                 // this.pagination = new Pagination(this.animals, 20);
                 return this.animals;

@@ -1,6 +1,6 @@
 export class Templater {
     static getPetTemplate({ id, image, breed, age, price, gender, species }) {
-        return `<div class="ui card">
+        return `<div class="ui card zoomInDown animated delay-fast">
         <img src="${image}" alt="${species}">
         <div class="content">
             <h1 class="header">${breed[0].toUpperCase() + breed.slice(1)}</h1>
@@ -50,7 +50,7 @@ export class Templater {
             }
         }
         if (pagesCount <= 7) {
-            return `<div class="center aligned column">
+            return `<div class="center aligned column zoomInDown animated delay-1s">
             <div class="ui pagination menu">${str}</div>
        </div>`;
         }
@@ -60,12 +60,12 @@ export class Templater {
         if (page !== pagesCount) {
             str += `<button class="item first__page">Last</button>`;
         }
-        return `<div class="center aligned column">
+        return `<div class="center aligned column zoomInDown animated delay-1s">
              <div class="ui pagination menu">${str}</div>
         </div>`;
     }
     static getModalInfoTemplate({ species, price, gender, weight, age, color, breed, image, is_sterile, hair, type, activity, water_type, temper }) {
-        return `<div class="ui modal">
+        return `<div class="ui modal flip animated faster">
         <div class="header">Breed: ${breed[0].toUpperCase() + breed.slice(1)}</div>
         <div class="image content">
             <div class="ui fluid image">
@@ -95,6 +95,6 @@ export class Templater {
     </div>`;
     }
     static getNoPetTemplate(query) {
-        return `<div class="ui massive message">Sorry, but we did not found "${query}"</div>`;
+        return `<div class="ui massive message zoomInDown animated delay-1s">Sorry, but we did not found "${query}"</div>`;
     }
 }
