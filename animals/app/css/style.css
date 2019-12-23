@@ -1,0 +1,103 @@
+body {
+    background-color: #f7f3ef;
+    font-family: 'Merienda', cursive;
+}
+
+.age {
+    margin-bottom: 15px;
+}
+
+.root {
+    margin-top: 20px !important;
+}
+
+.ui.card {
+    overflow: hidden;
+    margin: 20px;
+    transition: transform 250ms ease-in-out;
+    transform: scale(1);
+}
+
+.ui.card:hover {
+    transform: scale(1.05);
+}
+
+.ui.card img {
+    height: 300px;
+    object-fit: cover;
+}
+
+div.root div.ui.card:first-child {
+    margin-top: 20px;
+}
+
+div.root div.ui.card:last-child {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: inherit !important;
+}
+
+button {
+    outline: none;
+    font-family: 'Merienda', cursive !important;
+}
+
+.pagination.menu .item {
+    cursor: pointer;
+}
+
+.ui.borderless.fixed.menu {
+    /* background-color: rgb(233, 222, 205); */
+    /* font-family: inherit; */
+    background-color: #f7e3c9;
+    align-items: center;
+    height: 50px;
+}
+
+.ui.icon.input {
+    width: 300px;
+}
+
+.ui.to_cart {
+    color: white;
+    background-color: #3bb9b9;
+}
+
+.ui.details {
+    color: white;
+    background-color: #f3c992;
+}
+
+.ui.to_cart:hover, .ui.details:hover {
+    /* background-color: #aaf7d2; */
+    /* background-color: rgb(202, 82, 38); */
+    background-color: lightskyblue;
+}
+
+.search__button {
+    background-color: transparent !important;
+    margin-left: -50px !important;
+}
+
+.search__menu .header.item {
+    font-size: 20px;
+}
+
+.search__menu .item {
+    font-family: 'Merienda', cursive !important;
+    cursor: pointer;
+}
+
+.ui.modal .description {
+    width: 60% !important;
+}
+
+.info__container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
