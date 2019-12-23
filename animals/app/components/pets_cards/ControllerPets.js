@@ -50,19 +50,12 @@ export class ControllerPets {
             this.view.renderModalInfo(this.model.getPetById(Number(data.value)));
             $('.ui.modal')
                 .modal('setting', 'transition', 'scale')
-                .modal('show');
+                .modal('show')
+                .modal('setting', 'onHidden', () => {
+                    const el = document.querySelector('.ui.dimmer.modals.page');
+                    console.log(el);
+                    el.parentNode.removeChild(el);
+                });
         }
-
     }
 }
-
-
-
-
-
-
-//SCRIPT FOR MODAL
-
-// $('.ui.modal')
-//     .modal('setting', 'transition', 'scale')
-//     .modal('show');

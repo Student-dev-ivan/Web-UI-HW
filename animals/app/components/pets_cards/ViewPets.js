@@ -15,7 +15,7 @@ export class ViewPets {
         this.domPets.innerHTML = Templater.getNoPetTemplate(query);
     }
     renderModalInfo(animal) {
-        this.domPets.insertAdjacentHTML('beforebegin', Templater.getModalInfoTemplate(animal));
+        this.domPages.insertAdjacentHTML('beforeend', Templater.getModalInfoTemplate(animal));
     }
     addListeners(pageClickFunc, detailsClickFunc) {
         this.domPages.addEventListener('click', pageClickFunc);
