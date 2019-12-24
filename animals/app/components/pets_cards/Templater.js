@@ -3,7 +3,7 @@ export class Templater {
         return `<div class="ui card zoomInDown animated delay-fast">
         <img src="${image}" alt="${species}">
         <div class="content">
-            <h1 class="header">${breed[0].toUpperCase() + breed.slice(1)}</h1>
+            <h1 class="header">${breed}</h1>
             <div class="meta left aligned age">Age: ${age}</div>
             <div class="ui two column centered grid">
                 <div class="column">
@@ -50,7 +50,7 @@ export class Templater {
             }
         }
         if (pagesCount <= 7) {
-            return `<div class="center aligned column zoomInDown animated delay-1s">
+            return `<div class="center aligned column zoomInDown animated delay-fast">
             <div class="ui pagination menu">${str}</div>
        </div>`;
         }
@@ -60,7 +60,7 @@ export class Templater {
         if (page !== pagesCount) {
             str += `<button class="item first__page">Last</button>`;
         }
-        return `<div class="center aligned column zoomInDown animated delay-1s">
+        return `<div class="center aligned column zoomInDown animated delay-fast">
              <div class="ui pagination menu">${str}</div>
         </div>`;
     }
@@ -68,24 +68,67 @@ export class Templater {
         return `<div class="ui modal flip animated faster">
         <div class="header">Breed: ${breed[0].toUpperCase() + breed.slice(1)}</div>
         <div class="image content">
-            <div class="ui fluid image">
+            <div class="ui large image">
                 <img src="${image}">
             </div>
             <div class="description">
                 <div class="info__container">
                     <div class="ui header">Pet info:</div>
-                    <div class="item">Species: ${species}</div>
-                    <div class="item">Gender: ${gender}</div>
-                    <div class="item">Age: ${age}</div>
-                    <div class="item">Weight: ${weight}</div>
-                    <div class="item">Color: ${color}</div>
-                    ${is_sterile != undefined ? `<div class="item">Sterile: ${is_sterile ? 'yes' : 'no'}</div>` : ''} 
-                    ${!!hair ? `<div class="item">Hair: ${hair}</div>` : ''}
-                    ${!!type ? `<div class="item">Type: ${type}</div>` : ''}
-                    ${!!water_type ? `<div class="item">Type: ${water_type}</div>` : ''}
-                    ${!!activity ? `<div class="item">Activity: ${activity}</div>` : ''}
-                    ${!!temper ? `<div class="item">Temper: ${temper}</div>` : ''}
-                    <div class="item">Price: $${price}</div>
+                    <div class="item row">
+                        <div class="item name">Species:</div>
+                        <div class="item value">${species}</div>
+                    </div>
+                    <div class="item row">
+                        <div class="item name">Gender:</div>
+                        <div class="item value">${gender}</div>
+                    </div>
+                    <div class="item row">
+                        <div class="item name">Age:</div>
+                        <div class="item value">${age}</div>
+                    </div>
+                    <div class="item row">
+                        <div class="item name">Weight:</div>
+                        <div class="item value">${weight}</div>
+                    </div>
+                    <div class="item row">
+                        <div class="item name">Color:</div>
+                        <div class="item value">${color}</div>
+                    </div>
+                    
+                    ${is_sterile != undefined ?
+                    `<div class="item row">
+                        <div class="item name">Sterile:</div>
+                        <div class="item value">${is_sterile ? 'yes' : 'no'}</div>
+                    </div>` : ''} 
+                    ${!!hair ? 
+                    `<div class="item row">
+                        <div class="item name">Hair:</div>
+                        <div class="item value">${hair}</div>
+                    </div>` : ''}
+                    ${!!type ? 
+                    `<div class="item row">
+                        <div class="item name">Type:</div>
+                        <div class="item value">${type}</div>
+                    </div>` : ''}
+                    ${!!water_type ? 
+                    `<div class="item row">
+                        <div class="item name">Type:</div>
+                        <div class="item value">${water_type}</div>
+                    </div>` : ''}
+                    ${!!activity ? 
+                    `<div class="item row">
+                        <div class="item name">Activity:</div>
+                        <div class="item value">${activity}</div>
+                    </div>` : ''}
+                    ${!!temper ? 
+                    `<div class="item row">
+                        <div class="item name">Temper:</div>
+                        <div class="item value">${temper}</div>
+                    </div>` : ''}
+                    <div class="item row">
+                        <div class="item name">Price:</div>
+                        <div class="item value">$${price}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,6 +138,6 @@ export class Templater {
     </div>`;
     }
     static getNoPetTemplate(query) {
-        return `<div class="ui massive message zoomInDown animated delay-1s">Sorry, but we did not found "${query}"</div>`;
+        return `<div class="ui massive message zoomInDown animated delay-fast">Sorry, but we did not found "${query}"</div>`;
     }
 }

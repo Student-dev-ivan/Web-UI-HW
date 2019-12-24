@@ -40,21 +40,21 @@ export class ControllerPets {
             default:
                 page = Number(targetText);
         }
+        if (isNaN(page)) {
+            return;
+        }
         this.updatePage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     handleDetailsClick(event) {
-        const data = event.target.attributes['data-id'];
-        if (!!data) {
-            console.log(data.value)
-            console.log(this.model.getPetById(Number(data.value)))
-            this.view.renderModalInfo(this.model.getPetById(Number(data.value)));
+        const id = event.target.dataset.id;
+        if (!!id) {
+            this.view.renderModalInfo(this.model.getPetById(Number(id)));
             $('.ui.modal')
                 // .modal('setting', 'transition', 'scale')
                 .modal('show')
                 .modal('setting', 'onHidden', () => {
                     const el = document.querySelector('.ui.dimmer.modals.page');
-                    console.log(el);
                     el.parentNode.removeChild(el);
                 });
         }
