@@ -3,7 +3,8 @@ export class Publisher {
         this.subscriptions = {};
         this.methods = {
             subscribe: this.subscribe.bind(this),
-            publish: this.publish.bind(this)
+            publish: this.publish.bind(this),
+            unsubscribe: this.unsubscribe.bind(this)
         };
     }
 
@@ -19,5 +20,9 @@ export class Publisher {
     publish(event, data) {
         this.checkSubscription(event);
         this.subscriptions[event].forEach(sub => sub(data));
+    }
+    unsubscribe(event, func) {
+        this.checkSubscription(event);
+        this.subscriptions[event] = this.subscriptions[event].filter(fu => fu != func);
     }
 }

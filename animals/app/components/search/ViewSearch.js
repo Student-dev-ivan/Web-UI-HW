@@ -1,4 +1,4 @@
-import { Templater } from "./Templater.js";
+import { TemplaterSearch } from "./TemplaterSearch.js";
 
 export class ViewSearch {
     constructor() {
@@ -6,11 +6,19 @@ export class ViewSearch {
         this.renderMenu();
     }
     renderMenu() {
-        this.domMenu.innerHTML = Templater.getMenuTemplate();
+        this.domMenu.innerHTML = TemplaterSearch.getMenuTemplate();
         this.input = document.querySelector('.input__search');
     }
-    addListeners(searchFunc) {
+    addListeners(searchFunc, filterFunc) {
         document.querySelector('.ui.search').addEventListener('click', searchFunc);
         document.querySelector('.ui.search').addEventListener('keypress', searchFunc);
+        document.querySelector('.ui.container.search__menu').addEventListener('click', filterFunc);
     }
+    getInputValue() {
+        return this.input.value.trim();
+    }
+    clearInput() {
+        this.input.value = '';
+    }
+
 }

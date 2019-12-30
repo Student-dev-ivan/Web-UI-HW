@@ -1,10 +1,10 @@
-export class Templater {
-    static getPetTemplate({ id, image, breed, age, price, gender, species }) {
+export class TemplaterPets {
+    static getPetTemplate({ id, image, breed, age, price, gender, species, in_cart }) {
         return `<div class="ui card zoomInDown animated delay-fast">
         <img src="${image}" alt="${species}">
         <div class="content">
             <h1 class="header">${breed}</h1>
-            <div class="meta left aligned age">Age: ${age}</div>
+            <div class="meta age">Age: ${age}</div>
             <div class="ui two column centered grid">
                 <div class="column">
                     Price: $${price}
@@ -16,8 +16,8 @@ export class Templater {
         </div>
         <div class="extra content">
             <div class="ui two buttons">
-                <button class="ui to_cart button">Add to cart</button>
-                <button class="ui details button" data-id="${id}">Details</button>
+                <button class="ui to_cart button ${!in_cart ? '' : 'remove'}" data-id="${id}" data-btn="cart">${!in_cart ? 'Add to cart' : 'Remove'}</button>
+                <button class="ui details button" data-id="${id}" data-btn="details">Details</button>
             </div>
         </div>
     </div>`;
@@ -66,7 +66,7 @@ export class Templater {
     }
     static getModalInfoTemplate({ species, price, gender, weight, age, color, breed, image, is_sterile, hair, type, activity, water_type, temper }) {
         return `<div class="ui modal flip animated faster">
-        <div class="header">Breed: ${breed[0].toUpperCase() + breed.slice(1)}</div>
+        <div class="header">Breed: ${breed}</div>
         <div class="image content">
             <div class="ui large image">
                 <img src="${image}">
@@ -88,7 +88,7 @@ export class Templater {
                     </div>
                     <div class="item row">
                         <div class="item name">Weight:</div>
-                        <div class="item value">${weight}</div>
+                        <div class="item value">${weight} kg</div>
                     </div>
                     <div class="item row">
                         <div class="item name">Color:</div>
@@ -96,32 +96,32 @@ export class Templater {
                     </div>
                     
                     ${is_sterile != undefined ?
-                    `<div class="item row">
+                `<div class="item row">
                         <div class="item name">Sterile:</div>
                         <div class="item value">${is_sterile ? 'yes' : 'no'}</div>
                     </div>` : ''} 
-                    ${!!hair ? 
-                    `<div class="item row">
+                    ${!!hair ?
+                `<div class="item row">
                         <div class="item name">Hair:</div>
                         <div class="item value">${hair}</div>
                     </div>` : ''}
-                    ${!!type ? 
-                    `<div class="item row">
+                    ${!!type ?
+                `<div class="item row">
                         <div class="item name">Type:</div>
                         <div class="item value">${type}</div>
                     </div>` : ''}
-                    ${!!water_type ? 
-                    `<div class="item row">
+                    ${!!water_type ?
+                `<div class="item row">
                         <div class="item name">Type:</div>
                         <div class="item value">${water_type}</div>
                     </div>` : ''}
-                    ${!!activity ? 
-                    `<div class="item row">
+                    ${!!activity ?
+                `<div class="item row">
                         <div class="item name">Activity:</div>
                         <div class="item value">${activity}</div>
                     </div>` : ''}
-                    ${!!temper ? 
-                    `<div class="item row">
+                    ${!!temper ?
+                `<div class="item row">
                         <div class="item name">Temper:</div>
                         <div class="item value">${temper}</div>
                     </div>` : ''}

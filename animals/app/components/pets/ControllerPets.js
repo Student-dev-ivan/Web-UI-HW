@@ -2,28 +2,36 @@ import { ModelPets } from './ModelPets.js';
 import { ViewPets } from './ViewPets.js';
 
 export class ControllerPets {
-    constructor({ subscribe }) {
+    constructor({ subscribe, publish }) {
         this.model = new ModelPets();
         this.view = new ViewPets();
         this.subscribe = subscribe;
+        this.publish = publish;
         this.subscribe('onSearch', this.updatePetsList.bind(this));
+        this.subscribe('onFilter', this.filterPetsList.bind(this));
+        this.subscribe('onAddToCart', this.handleAddToCart.bind(this));
+        this.subscribe('onRemoveFromCart', this.handleRemoveFromCart.bind(this));//add function
         this.updatePetsList();
-        this.view.addListeners(this.handlePageClick.bind(this), this.handleDetailsClick.bind(this));
+        this.view.addListeners(this.handlePageClick.bind(this), this.handleCardButtonClick.bind(this));
     }
     updatePetsList(query) {
         // if (query === '') {
         //     return;
         // }
-        this.model.getPets(query).then(() => {
-            if (this.model.animals.length != 0) {
-                this.updatePage(1);
+        this.model.getPets(query).then((animals) => {
+            if (animals.length != 0) {
+                this.updatePage();
             } else {
-                this.updatePage(1);
+                this.updatePage();
                 this.view.renderNoPetMessage(query);
             }
         });
     }
-    updatePage(page) {
+    filterPetsList(species) {
+        this.model.filterPets(species);
+        this.updatePage();
+    }
+    updatePage(page = 1) {
         this.view.renderAllCards(this.model.getAnimalsAtPage(page));
         this.view.renderPaginationMenu(page, this.model.getPagesCount());
     }
@@ -46,10 +54,15 @@ export class ControllerPets {
         this.updatePage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    handleDetailsClick(event) {
-        const id = event.target.dataset.id;
-        if (!!id) {
-            this.view.renderModalInfo(this.model.getPetById(Number(id)));
+    handleCardButtonClick(event) {
+        const dataset = event.target.dataset;
+        const id = Number(dataset.id);
+        let btn = dataset.btn;
+        if (isNaN(id)) {
+            return;
+        }
+        if (btn === 'details') {
+            this.view.renderModalInfo(this.model.getPetById(id));
             $('.ui.modal')
                 // .modal('setting', 'transition', 'scale')
                 .modal('show')
@@ -58,5 +71,23 @@ export class ControllerPets {
                     el.parentNode.removeChild(el);
                 });
         }
+        if (btn === 'cart') {
+            this.handleCart(id);
+        }
+    }
+    handleAddToCart(id) {
+        this.model.updateSessionStorage(id, true);
+    }
+    handleRemoveFromCart(id) {
+        this.model.updateSessionStorage(id, false);
+    }
+    handleCart(id) {
+        const pet = this.model.getPetById(id);
+        if (!pet.in_cart) {
+            this.publish('onAddToCart', id);
+        } else {
+            this.publish('onRemoveFromCart', id);
+        }
+        this.view.addRemoveToggle(event.target);
     }
 }

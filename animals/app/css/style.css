@@ -67,7 +67,17 @@ button {
     background-color: #3bb9b9;
 }
 
+.ui.to_cart.remove {
+    color: white;
+    background-color: #d82929;
+}
+
 .ui.details {
+    color: white;
+    background-color: #f3c992;
+}
+
+.ui.details:focus {
     color: white;
     background-color: #f3c992;
 }
@@ -91,13 +101,23 @@ button {
     cursor: pointer;
 }
 
-.ui.modal {}
+.search__menu .shopping.cart {
+    font-size: 24px;
+}
+
+.ui.modal .header {
+    text-transform: capitalize;
+}
 
 .ui.modal .item.row {
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.ui.modal .image {
+    align-items: center;
 }
 
 .ui.modal.flip.animated img {
@@ -115,4 +135,52 @@ button {
     justify-content: space-evenly;
     align-items: center;
     font-size: 20px;
+}
+
+/* cart */
+
+.cart__counter {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    padding: 2px 0px;
+    min-width: 20px;
+    text-align: center;
+    background-color: #f59547;
+    border-radius: 50%;
+}
+
+.cart__container {
+    margin-top: 20px;
+    width: 800px;
+}
+
+.cart__container .ui.header {
+    font-size: 50px;
+}
+
+.cart__container .ui.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.cart__container .info {
+    text-transform: capitalize;
+    font-size: 24px;
+}
+
+.cart__container .ui.buttons button {
+    width: 400px;
+}
+
+.cart__container img {
+    border-radius: 20px;
+}
+
+.total__amount {
+    font-size: 30px;
+    padding: 40px 0px;
 }
