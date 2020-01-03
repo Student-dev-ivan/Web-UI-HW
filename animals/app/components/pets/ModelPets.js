@@ -7,14 +7,22 @@ export class ModelPets {
         this.itemsPerPage = 30;
         this.animals;
     }
+    updateCurrentPageNumber(pageNumber) {
+        sessionStorage.setItem('currentPage', pageNumber);
+    }
     getPetById(id) {
         return JSON.parse(sessionStorage.getItem('animals')).find(animal => animal.id === id);
     }
-    filterPets(species) {
-        const storageAnimals = JSON.parse(sessionStorage.getItem('animals'));
-        this.animals = species === 'all' ?
-            storageAnimals :
-            storageAnimals.filter(animal => animal.species === species);
+    // filterPets(species) {
+    //     // this.animals = this.getPets(breed).then(animals => animals.filter(animal => animal.species === species));
+
+    //     const storageAnimals = JSON.parse(sessionStorage.getItem('animals'));
+    //     this.animals = species === 'allPets' ?
+    //         storageAnimals :
+    //         storageAnimals.filter(animal => animal.species === species);
+    // }
+    filterPets(animals, species) {
+        return species === 'all' ? animals : animals.filter(animal => animal.species === species);
     }
     updateSessionStorage(id, inCart) {
         const currenValues = JSON.parse(sessionStorage.getItem('animals'));
@@ -25,7 +33,10 @@ export class ModelPets {
         });
         sessionStorage.setItem('animals', JSON.stringify(currenValues));
     }
-    async getPets(breed = 'all') {
+    sortAnimals(field) {
+        this.animals.sort((animal1, animal2) => animal1[field] - animal2[field]);
+    }
+    async getPets(breed = '', species = '') {
         const storageAnimals = sessionStorage.getItem('animals');
         if (!storageAnimals) {
             return fetch(this.dbLink)
@@ -34,15 +45,21 @@ export class ModelPets {
                     const now = new Date();
                     res.forEach(animal => animal.age = this.calculateAge(now, animal.birth_date));
                     res.sort(() => Math.random() - Math.random());
-                    sessionStorage.setItem('animals', JSON.stringify(res));
                     this.animals = res;
+                    // this.sortAnimals('birth_date');
+                    sessionStorage.setItem('animals', JSON.stringify(res));
+
                     return this.animals;
                 });
         } else {
-            if (breed !== 'all') {
-                this.animals = JSON.parse(storageAnimals).filter(animal => animal.breed.toLowerCase().includes(breed.toLowerCase()));
+            let tmpAnimals;
+
+            if (breed !== '') {
+                tmpAnimals = JSON.parse(storageAnimals).filter(animal => animal.breed.toLowerCase().includes(breed.toLowerCase()));
+                this.animals = this.filterPets(tmpAnimals, species);
             } else {
-                this.animals = JSON.parse(storageAnimals);
+                tmpAnimals = JSON.parse(storageAnimals);
+                this.animals = this.filterPets(tmpAnimals, species);
             }
             return this.animals;
         }
@@ -65,11 +82,11 @@ export class ModelPets {
         const years = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 365);
         const months = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 30) % 12;
         switch (true) {
-            case years > 0 && months > 0:
+            case years > 0 && months >= 0:
                 return `${years} ${years > 1 ? 'years' : 'year'} ${months} ${months > 1 ? 'months' : 'month'}`;
             case years > 0:
                 return `${years} ${years > 1 ? 'years' : 'year'}`;
-            case months > 0:
+            case months >= 0:
                 return `${months} ${months > 1 ? 'months' : 'month'}`;
             default:
                 return 'less than month';

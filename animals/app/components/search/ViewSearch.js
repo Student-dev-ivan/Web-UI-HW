@@ -14,11 +14,15 @@ export class ViewSearch {
         document.querySelector('.ui.search').addEventListener('keypress', searchFunc);
         document.querySelector('.ui.container.search__menu').addEventListener('click', filterFunc);
     }
+    selectSpecies(element) {
+        this.domMenu.querySelector('.active').classList.toggle('active');
+        element.classList.toggle('active');
+    }
     getInputValue() {
         return this.input.value.trim();
     }
-    clearInput() {
-        this.input.value = '';
-    }
+    // clearInput() {
+    //     this.input.value = '';
+    // }
 
 }

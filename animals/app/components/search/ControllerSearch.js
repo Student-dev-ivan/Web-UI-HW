@@ -1,21 +1,31 @@
 import { ViewSearch } from "./ViewSearch.js";
+import { ModelSearch } from "./ModelSearch.js";
 
 export class ControllerSearch {
     constructor({ publish }) {
         this.view = new ViewSearch();
+        this.model = new ModelSearch();
+        this.model.updateSelectedSpecies('all');
+        this.model.updateEnteredBreed('');
         this.view.addListeners(this.handleSearch.bind(this), this.handleFilter.bind(this));
         this.publish = publish;
     }
     handleSearch(event) {
         if (event.keyCode === 13 || event.target.classList.value === 'search icon') {
-            this.publish('onSearch', this.view.getInputValue());
+            // this.publish('onSearch', this.view.getInputValue());
+            const breed = this.view.getInputValue();
+            this.model.updateEnteredBreed(breed);
+            this.publish('onSearch', { breed, species: this.model.getSelectedSpecies() });
         }
     }
     handleFilter(event) {
-        const species = event.target.dataset.species;
+        const element = event.target;
+        const species = element.dataset.species;
         if (!!species) {
-            this.publish('onFilter', species);
-            this.view.clearInput();
+            this.model.updateSelectedSpecies(species);
+            this.publish('onFilter', { species, breed: this.model.getEnteredBreed() });
+            this.view.selectSpecies(element);
+            // this.view.clearInput();
         }
     }
 }

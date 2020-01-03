@@ -138,6 +138,6 @@ export class TemplaterPets {
     </div>`;
     }
     static getNoPetTemplate(query) {
-        return `<div class="ui massive message zoomInDown animated delay-fast">Sorry, but we did not found "${query}"</div>`;
+        return `<div class="ui massive message zoomInDown animated delay-faster">Sorry, but we did not found "${query}"</div>`;
     }
 }

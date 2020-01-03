@@ -7,7 +7,7 @@ export class TemplaterSearch {
                 Pet Shop
             </div>
         </a>
-        <div class="item" data-species="all">All</div>
+        <div class="item active" data-species="all">All</div>
         <div class="item" data-species="dog">Dogs</div>
         <div class="item" data-species="cat">Cats</div>
         <div class="item" data-species="bird">Birds</div>
