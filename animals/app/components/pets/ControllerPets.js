@@ -16,6 +16,7 @@ export class ControllerPets {
         this.subscribe('onSort', this.handleSort.bind(this));
         this.view.addListeners(this.handlePageClick.bind(this), this.handleCardButtonClick.bind(this));
     }
+
     updatePetsList({ breed, species }) {
         this.model.getPets(breed, species).then((animals) => {
             this.updatePage();
@@ -24,15 +25,18 @@ export class ControllerPets {
             }
         });
     }
+
     filterPetsList(species) {
         this.model.filterPets(species);
         this.updatePage();
     }
+
     updatePage(page = 1) {
         this.model.updateCurrentPageNumber(page);
         this.view.renderAllCards(this.model.getAnimalsAtPage(page));
         this.view.renderPaginationMenu(page, this.model.getPagesCount());
     }
+
     handlePageClick(event) {
         const targetText = event.target.innerText.trim();
         let page;
@@ -52,6 +56,7 @@ export class ControllerPets {
         this.updatePage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+
     handleCardButtonClick(event) {
         const dataset = event.target.dataset;
         const id = Number(dataset.id);
@@ -73,12 +78,15 @@ export class ControllerPets {
             this.handleCart(id);
         }
     }
+
     handleAddToCart(id) {
         this.model.updateSessionStorage(id, true);
     }
+
     handleRemoveFromCart(id) {
         this.model.updateSessionStorage(id, false);
     }
+
     handleCart(id) {
         const pet = this.model.getPetById(id);
         if (!pet.in_cart) {
@@ -88,6 +96,7 @@ export class ControllerPets {
         }
         this.view.addRemoveToggle(event.target);
     }
+
     handleSort(sort) {
         this.model.sortAnimals(sort);
         this.updatePage(this.model.getCurrentPage());

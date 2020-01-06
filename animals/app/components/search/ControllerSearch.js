@@ -10,6 +10,7 @@ export class ControllerSearch {
         this.view.addListeners(this.handleSearch.bind(this), this.handleFilter.bind(this), this.handleSort.bind(this));
         this.publish = publish;
     }
+
     handleSearch(event) {
         if (event.keyCode === 13 || event.target.classList.value === 'search icon') {
             // this.publish('onSearch', this.view.getInputValue());
@@ -18,6 +19,7 @@ export class ControllerSearch {
             this.publish('onSearch', { breed, species: this.model.getSelectedSpecies() });
         }
     }
+
     handleFilter(event) {
         const element = event.target;
         const species = element.dataset.species;
@@ -28,6 +30,7 @@ export class ControllerSearch {
             // this.view.clearInput();
         }
     }
+    
     handleSort(event) {
         const element = event.target;
         let sort = element.dataset.sort;

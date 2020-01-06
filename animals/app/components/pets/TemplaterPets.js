@@ -1,4 +1,5 @@
 export class TemplaterPets {
+
     static getPetTemplate({ id, image, breed, age, price, gender, species, in_cart }) {
         return `<div class="ui card zoomInDown animated delay-fast">
         <img src="${image}" alt="${species}">
@@ -22,6 +23,7 @@ export class TemplaterPets {
         </div>
     </div>`;
     }
+
     static getPageButtonsTemplate(page, pagesCount) {
         let str = '';
 
@@ -64,6 +66,7 @@ export class TemplaterPets {
              <div class="ui pagination menu">${str}</div>
         </div>`;
     }
+
     static getModalInfoTemplate({ species, price, gender, weight, age, color, breed, image, is_sterile, hair, type, activity, water_type, temper }) {
         return `<div class="ui modal flip animated faster">
         <div class="header">Breed: ${breed}</div>
@@ -137,6 +140,7 @@ export class TemplaterPets {
         </div>
     </div>`;
     }
+
     static getNoPetTemplate(query) {
         return `<div class="ui massive message zoomInDown animated delay-faster">Sorry, but we did not found "${query}"</div>`;
     }

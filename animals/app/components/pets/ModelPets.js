@@ -7,26 +7,23 @@ export class ModelPets {
         this.itemsPerPage = 30;
         this.animals;
     }
+
     getCurrentPage() {
         return Number(sessionStorage.getItem('currentPage')) || 1;
     }
+
     updateCurrentPageNumber(pageNumber) {
         sessionStorage.setItem('currentPage', pageNumber);
     }
+
     getPetById(id) {
         return JSON.parse(sessionStorage.getItem('animals')).find(animal => animal.id === id);
     }
-    // filterPets(species) {
-    //     // this.animals = this.getPets(breed).then(animals => animals.filter(animal => animal.species === species));
-
-    //     const storageAnimals = JSON.parse(sessionStorage.getItem('animals'));
-    //     this.animals = species === 'allPets' ?
-    //         storageAnimals :
-    //         storageAnimals.filter(animal => animal.species === species);
-    // }
+    
     filterPets(animals, species) {
         return species === 'all' ? animals : animals.filter(animal => animal.species === species);
     }
+
     updateSessionStorage(id, inCart) {
         const currenValues = JSON.parse(sessionStorage.getItem('animals'));
         currenValues.forEach(animal => {
@@ -36,6 +33,7 @@ export class ModelPets {
         });
         sessionStorage.setItem('animals', JSON.stringify(currenValues));
     }
+
     sortAnimals({ field, order }) {
         this.animals.sort((animal1, animal2) => {
             if (field === 'price') {
@@ -44,6 +42,7 @@ export class ModelPets {
             return order === 'asc' ? animal2[field] - animal1[field] : animal1[field] - animal2[field];
         });
     }
+
     async getPets(breed = '', species = '') {
         const storageAnimals = sessionStorage.getItem('animals');
         if (!storageAnimals) {
@@ -69,20 +68,6 @@ export class ModelPets {
             }
             return this.animals;
         }
-        // return fetch(this.dbLink)
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         const now = new Date();
-        //         if (breed !== 'all') {
-        //             res = res.filter((animal) => animal.breed.toLowerCase().includes(breed.toLowerCase()));
-        //         }
-        //         res.forEach(animal => animal.age = this.calculateAge(now, animal.birth_date));
-        //         // res.sort(() => Math.random() - Math.random());
-        //         this.animals = res;
-        //         // this.pagination = new Pagination(this.animals, 20);
-        //         return this.animals;
-        //     });
-
     }
     calculateAge(now, birthDate) {
         // const years = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 365);
@@ -106,18 +91,9 @@ export class ModelPets {
         const start = (page - 1) * this.itemsPerPage;
         return this.animals.slice(start, start + this.itemsPerPage);
     }
+
     getPagesCount() {
         return Math.ceil(this.animals.length / this.itemsPerPage);
     }
-
-    // getAnimalsAtPage(page) {
-    //     return this.pagination.getPageElements(page);
-    // }
-    // getPagesCount() {
-    //     return this.pagination.getItemsCount();
-    // }
-    // getCurrentPage() {
-    //     return this.pagination.currentPage;
-    // }
 }
 

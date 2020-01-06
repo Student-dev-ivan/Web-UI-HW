@@ -1,4 +1,5 @@
 export class TemplaterCart {
+
     static getCartTemplate() {
         return `<div class="cart__container lightSpeedIn animated delay-fast">
         <div class="ui header">Cart</div>
@@ -100,6 +101,7 @@ ${animals.map(animal => {
 
 #############################`
     }
+    
     static getOrderCompletedMsgTemplate() {
         return `<div class="ui positive massive message fadeIn animated delay-fast">
         <div class="header">Order completed!</div>

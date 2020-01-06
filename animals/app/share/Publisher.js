@@ -13,14 +13,17 @@ export class Publisher {
             this.subscriptions[event] = [];
         }
     }
+
     subscribe(event, func) {
         this.checkSubscription(event);
         this.subscriptions[event].push(func);
     }
+
     publish(event, data) {
         this.checkSubscription(event);
         this.subscriptions[event].forEach(sub => sub(data));
     }
+    
     unsubscribe(event, func) {
         this.checkSubscription(event);
         this.subscriptions[event] = this.subscriptions[event].filter(fu => fu != func);
