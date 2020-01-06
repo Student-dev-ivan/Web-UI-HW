@@ -1,19 +1,17 @@
 export class TemplaterCart {
-
-    static getCartTemplate() {
+    static getCartTemplate(total__amount) {
         return `<div class="cart__container lightSpeedIn animated delay-fast">
         <div class="ui header">Cart</div>
         <div class="ui buttons">
             <button class="ui blue button" data-type="view">View cart</button>
             <div class="or" data-text="<->"></div>
-            <button class="ui button" data-type="order">Place an order</button>
+            <button class="ui ${total__amount > 0 ? '' : 'disabled'} button" data-type="order">Place an order</button>
         </div>
         <div class="content"></div>
     </div>`
     }
 
     static getCartContentTemplate(display, cartItems, totalAmount) {
-        const enabled = cartItems.length > 0;
         return `<div class="${display === 'view' ? 'fadeInLeft' : 'fadeInRight'} animated delay-fast">${display === 'view' ?
             `<div class="total__amount">Total: $<span>${totalAmount}</span></div>
 <div class="ui divider"></div>
@@ -28,30 +26,30 @@ export class TemplaterCart {
             <button class="ui teal fluid button" data-type="back"><i class="left arrow icon"></i>back to the shop</button>
             <div class="ui large form">
                 <div class="two fields">
-                    <div class="required ${enabled ? '' : 'disabled'} field" data-input="name">
+                    <div class="required field" data-input="name">
                         <label>Name</label>
                         <input placeholder="Jhon" type="text">
                     </div>
-                    <div class="required ${enabled ? '' : 'disabled'} field" data-input="phone">
+                    <div class="required field" data-input="phone">
                         <label>Phone</label>
                         <input placeholder="+380 xx xxx xx xx" type="tel">
                     </div>
                 </div>
                 <div class="two fields">
-                    <div class="required ${enabled ? '' : 'disabled'} field" data-input="email">
+                    <div class="required field" data-input="email">
                         <label>Email</label>
                         <input placeholder="Jhon@gmail.com" type="email">
                     </div>
-                    <div class="required ${enabled ? '' : 'disabled'} field" data-input="address">
+                    <div class="required field" data-input="address">
                         <label>Address</label>
                         <input placeholder="City, street, house" type="text">
                     </div>
                 </div>
-            <div class="${enabled ? '' : 'disabled'} field" data-input="notes">
+            <div class= field" data-input="notes">
                 <label>Notes</label>
                 <textarea rows="5"></textarea>
             </div>
-            <div class="ui positive submit ${enabled ? '' : 'disabled'} button" data-type="submit">Submit</div>
+            <div class="ui positive submit button" data-type="submit">Submit</div>
         </div>
     </div?`}
 ${display === 'view' ? `<div class="cart_items">${cartItems.map(animal => this.getCartItemTemplate(animal)).join('')}</div>` : ''} `
@@ -101,7 +99,7 @@ ${animals.map(animal => {
 
 #############################`
     }
-    
+
     static getOrderCompletedMsgTemplate() {
         return `<div class="ui positive massive message fadeIn animated delay-fast">
         <div class="header">Order completed!</div>

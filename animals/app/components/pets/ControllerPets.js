@@ -10,7 +10,7 @@ export class ControllerPets {
         this.subscribe('onSearch', this.updatePetsList.bind(this));
         this.subscribe('onFilter', this.updatePetsList.bind(this));
         this.subscribe('onAddToCart', this.handleAddToCart.bind(this));
-        this.subscribe('onRemoveFromCart', this.handleRemoveFromCart.bind(this));//add function
+        this.subscribe('onRemoveFromCart', this.handleRemoveFromCart.bind(this));
         this.updatePetsList({ breed: '', species: 'all' });
         this.subscribe('onBackFromCart', this.updatePage.bind(this));
         this.subscribe('onSort', this.handleSort.bind(this));

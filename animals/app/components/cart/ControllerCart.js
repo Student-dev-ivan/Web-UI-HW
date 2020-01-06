@@ -22,13 +22,13 @@ export class ControllerCart {
         this.view.updateCartTotalAmount(this.model.getTotalAmount());
     }
     handleCartIconClick() {
-        this.view.renderCart();
+        this.view.renderCart(this.model.getTotalAmount());
         this.view.renderCartContent('view', this.model.getAnimals(), this.model.getTotalAmount());
         window.scrollTo({ top: 0 });
     }
     toggleContent(display) {
         this.view.renderCartContent(display, this.model.getAnimals(), this.model.getTotalAmount());
-        this.view.orderViewToggle();
+        this.view.orderViewToggle(display);
     }
 
     handleCartButtonsClick(event) {

@@ -1,5 +1,4 @@
 export class TemplaterPets {
-
     static getPetTemplate({ id, image, breed, age, price, gender, species, in_cart }) {
         return `<div class="ui card zoomInDown animated delay-fast">
         <img src="${image}" alt="${species}">

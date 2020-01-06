@@ -1,5 +1,4 @@
 export class ModelSearch {
-
     getSelectedSpecies() {
         return sessionStorage.getItem('speceies') || '';
     }
@@ -14,6 +13,5 @@ export class ModelSearch {
 
     updateEnteredBreed(breed) {
         sessionStorage.setItem('breed', breed);
-
     }
 }

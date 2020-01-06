@@ -1,5 +1,4 @@
 export class ModelCart {
-
     getCurrentPage() {
         return Number(sessionStorage.getItem('currentPage')) || 1;
     }

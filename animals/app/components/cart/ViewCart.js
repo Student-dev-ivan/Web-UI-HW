@@ -9,14 +9,14 @@ export class ViewCart {
         this.cartCounterDOM.innerText = animalsCount;
     }
 
-    orderViewToggle() {
-        this.rootDOM.querySelector('button[data-type="view"]').classList.toggle('blue');
-        this.rootDOM.querySelector('button[data-type="order"]').classList.toggle('blue');
+    orderViewToggle(display) {
+        this.rootDOM.querySelector('button[data-type="view"]').classList.toggle('blue', display === 'view' ? true : false);
+        this.rootDOM.querySelector('button[data-type="order"]').classList.toggle('blue', display === 'view' ? false : true);
     }
 
-    renderCart(display, cartItems, totalAmount) {
+    renderCart(totalAmount) {
         document.querySelector('.pages').innerHTML = '';
-        this.rootDOM.innerHTML = TemplaterCart.getCartTemplate(display, cartItems, totalAmount);
+        this.rootDOM.innerHTML = TemplaterCart.getCartTemplate(totalAmount);
     }
 
     renderCartContent(display, cartItems, totalAmount) {
