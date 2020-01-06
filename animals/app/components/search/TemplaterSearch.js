@@ -12,6 +12,16 @@ export class TemplaterSearch {
         <div class="item" data-species="cat">Cats</div>
         <div class="item" data-species="bird">Birds</div>
         <div class="item" data-species="fish">Fishes</div>
+        <div class="ui simple dropdown item">
+            Sort By
+            <i class="dropdown icon"></i>
+            <div class="menu">
+            <div class="item" data-sort="price asc">Price <i class="angle up icon"></i></div>
+            <div class="item" data-sort="price desc">Price <i class="angle down icon"></i></div>
+            <div class="item" data-sort="birth_date asc">Age <i class="angle up icon"></i></div>
+            <div class="item" data-sort="birth_date desc">Age <i class="angle down icon"></i></div>
+            </div>
+        </div>
         <div class="right menu">
             <div class="ui search item">
                 <div class="ui icon input">

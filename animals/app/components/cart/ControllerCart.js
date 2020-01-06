@@ -1,5 +1,6 @@
 import { ViewCart } from './ViewCart.js';
 import { ModelCart } from './ModelCart.js';
+import { TemplaterCart } from './TemplaterCart.js'
 
 export class ControllerCart {
     constructor({ subscribe, publish }) {
@@ -48,8 +49,14 @@ export class ControllerCart {
                 break;
             case dataset === 'submit':
                 const input = this.view.getOrderInput();
-                if (this.isValidInput(input)) {
-                    console.log(input);
+                if (!this.isValidInput(input)) {
+                    const text = TemplaterCart.getOrderTemplate(input, this.model.getAnimals(), this.model.getTotalAmount());
+                    fetch(`https://api.telegram.org/bot987525486:AAFQf1i1D3p4ZT84cYZTJU1KEk9vg693mlI/sendMessage?chat_id=477223820&text=${encodeURIComponent(text)}&parse_mode=MarkDown`)
+                        .then(d => d.json())
+                        .then(data => console.log(data));
+                    this.model.clearCart();
+                    this.view.updateCartCounter(this.model.getCartItemsCount());
+                    this.view.renderOrderCompletedMsg();
                 }
                 break;
         }

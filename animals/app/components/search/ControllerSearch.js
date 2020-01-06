@@ -7,7 +7,7 @@ export class ControllerSearch {
         this.model = new ModelSearch();
         this.model.updateSelectedSpecies('all');
         this.model.updateEnteredBreed('');
-        this.view.addListeners(this.handleSearch.bind(this), this.handleFilter.bind(this));
+        this.view.addListeners(this.handleSearch.bind(this), this.handleFilter.bind(this), this.handleSort.bind(this));
         this.publish = publish;
     }
     handleSearch(event) {
@@ -26,6 +26,15 @@ export class ControllerSearch {
             this.publish('onFilter', { species, breed: this.model.getEnteredBreed() });
             this.view.selectSpecies(element);
             // this.view.clearInput();
+        }
+    }
+    handleSort(event) {
+        const element = event.target;
+        let sort = element.dataset.sort;
+        if (!!sort) {
+            sort = sort.split(' ');
+            console.log(sort);
+            this.publish('onSort', { field: sort[0], order: sort[1] });
         }
     }
 }

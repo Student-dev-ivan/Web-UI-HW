@@ -7,6 +7,9 @@ export class ModelPets {
         this.itemsPerPage = 30;
         this.animals;
     }
+    getCurrentPage() {
+        return Number(sessionStorage.getItem('currentPage')) || 1;
+    }
     updateCurrentPageNumber(pageNumber) {
         sessionStorage.setItem('currentPage', pageNumber);
     }
@@ -33,8 +36,13 @@ export class ModelPets {
         });
         sessionStorage.setItem('animals', JSON.stringify(currenValues));
     }
-    sortAnimals(field) {
-        this.animals.sort((animal1, animal2) => animal1[field] - animal2[field]);
+    sortAnimals({ field, order }) {
+        this.animals.sort((animal1, animal2) => {
+            if (field === 'price') {
+                return order === 'asc' ? animal1[field] - animal2[field] : animal2[field] - animal1[field];
+            }
+            return order === 'asc' ? animal2[field] - animal1[field] : animal1[field] - animal2[field];
+        });
     }
     async getPets(breed = '', species = '') {
         const storageAnimals = sessionStorage.getItem('animals');
@@ -42,13 +50,11 @@ export class ModelPets {
             return fetch(this.dbLink)
                 .then(res => res.json())
                 .then(res => {
-                    const now = new Date();
+                    const now = Date.now();
                     res.forEach(animal => animal.age = this.calculateAge(now, animal.birth_date));
                     res.sort(() => Math.random() - Math.random());
                     this.animals = res;
-                    // this.sortAnimals('birth_date');
                     sessionStorage.setItem('animals', JSON.stringify(res));
-
                     return this.animals;
                 });
         } else {
@@ -79,14 +85,17 @@ export class ModelPets {
 
     }
     calculateAge(now, birthDate) {
-        const years = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 365);
-        const months = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 30) % 12;
+        // const years = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 365);
+        // const months = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 30) % 12;
+        const tmp = new Date(now - birthDate);
+        const years = tmp.getFullYear() - 1970;
+        const months = tmp.getMonth();
         switch (true) {
-            case years > 0 && months >= 0:
+            case years > 0 && months > 0:
                 return `${years} ${years > 1 ? 'years' : 'year'} ${months} ${months > 1 ? 'months' : 'month'}`;
             case years > 0:
                 return `${years} ${years > 1 ? 'years' : 'year'}`;
-            case months >= 0:
+            case months > 0:
                 return `${months} ${months > 1 ? 'months' : 'month'}`;
             default:
                 return 'less than month';

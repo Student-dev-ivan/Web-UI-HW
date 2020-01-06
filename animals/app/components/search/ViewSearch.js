@@ -9,10 +9,11 @@ export class ViewSearch {
         this.domMenu.innerHTML = TemplaterSearch.getMenuTemplate();
         this.input = document.querySelector('.input__search');
     }
-    addListeners(searchFunc, filterFunc) {
+    addListeners(searchFunc, filterFunc, sortFunc) {
         document.querySelector('.ui.search').addEventListener('click', searchFunc);
         document.querySelector('.ui.search').addEventListener('keypress', searchFunc);
         document.querySelector('.ui.container.search__menu').addEventListener('click', filterFunc);
+        document.querySelector('.ui.container.search__menu').addEventListener('click', sortFunc);
     }
     selectSpecies(element) {
         this.domMenu.querySelector('.active').classList.toggle('active');

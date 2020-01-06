@@ -13,6 +13,7 @@ export class ControllerPets {
         this.subscribe('onRemoveFromCart', this.handleRemoveFromCart.bind(this));//add function
         this.updatePetsList({ breed: '', species: 'all' });
         this.subscribe('onBackFromCart', this.updatePage.bind(this));
+        this.subscribe('onSort', this.handleSort.bind(this));
         this.view.addListeners(this.handlePageClick.bind(this), this.handleCardButtonClick.bind(this));
     }
     updatePetsList({ breed, species }) {
@@ -86,5 +87,9 @@ export class ControllerPets {
             this.publish('onRemoveFromCart', id);
         }
         this.view.addRemoveToggle(event.target);
+    }
+    handleSort(sort) {
+        this.model.sortAnimals(sort);
+        this.updatePage(this.model.getCurrentPage());
     }
 }

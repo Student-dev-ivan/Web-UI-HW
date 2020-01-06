@@ -24,6 +24,9 @@ export class ViewCart {
     renderCartIcon() {
         this.cartDOM.innerHTML = TemplaterCart.getCartIconTemplate();
     }
+    renderOrderCompletedMsg() {
+        this.rootDOM.innerHTML = TemplaterCart.getOrderCompletedMsgTemplate();
+    }
     updateCartCounter(count) {
         this.cartCounterDOM.innerText = count;
     }
@@ -57,4 +60,5 @@ export class ViewCart {
             notes: inputValues[4]
         };
     }
+
 }

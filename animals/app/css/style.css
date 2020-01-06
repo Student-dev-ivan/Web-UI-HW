@@ -204,3 +204,12 @@ button {
 .ui.form input {
     line-height: 1.4em !important;
 }
+
+/*MSG order*/
+
+.ui.positive.massive.message {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
