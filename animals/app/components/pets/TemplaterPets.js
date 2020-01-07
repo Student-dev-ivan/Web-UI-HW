@@ -1,7 +1,9 @@
+
 export class TemplaterPets {
+
     static getPetTemplate({ id, image, breed, age, price, gender, species, in_cart }) {
         return `<div class="ui card zoomInDown animated delay-fast">
-        <img src="${image}" alt="${species}">
+        <img src="${image}" alt="${species}" onerror="this.onerror = null; this.src='app/assets/no-image.png';">
         <div class="content">
             <h1 class="header">${breed}</h1>
             <div class="meta age">Age: ${age}</div>
@@ -29,8 +31,10 @@ export class TemplaterPets {
         if (pagesCount === 0) {
             return str;
         }
+
         let leftMost = page - 3;
         let rightMost = page + 3;
+
         if (leftMost < 1) {
             leftMost = 1;
             rightMost = pagesCount >= 7 ? 7 : pagesCount;
@@ -40,8 +44,6 @@ export class TemplaterPets {
             leftMost = left > 0 ? left : 1;
             rightMost = pagesCount;
         }
-        // leftMost = leftMost < 1 ? 1 : leftMost;
-        // rightMost = rightMost > pagesCount ? pagesCount : rightMost;
 
         for (leftMost; leftMost <= rightMost; leftMost++) {
             if (leftMost === page) {
@@ -50,6 +52,7 @@ export class TemplaterPets {
                 str += `<button class="item">${leftMost}</button>`;
             }
         }
+
         if (pagesCount <= 7) {
             return `<div class="center aligned column zoomInDown animated delay-fast">
             <div class="ui pagination menu">${str}</div>
@@ -71,7 +74,7 @@ export class TemplaterPets {
         <div class="header">Breed: ${breed}</div>
         <div class="image content">
             <div class="ui large image">
-                <img src="${image}">
+                <img src="${image} alt="${species}" onerror="this.onerror = null; this.src='app/assets/no-image.png';">
             </div>
             <div class="description">
                 <div class="info__container">

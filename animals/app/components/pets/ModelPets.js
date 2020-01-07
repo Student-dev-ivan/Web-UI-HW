@@ -1,8 +1,6 @@
-import { Pagination } from "./Pagination.js";
 
 export class ModelPets {
     constructor() {
-        // this.dbLink = 'https://student-dev-ivan.github.io/Web-UI-HW/animals/animals-en-general.json';
         this.dbLink = 'https://maksv21.github.io/softserve/demo2/database/animals_en.json';
         this.itemsPerPage = 30;
         this.animals;
@@ -19,13 +17,14 @@ export class ModelPets {
     getPetById(id) {
         return JSON.parse(sessionStorage.getItem('animals')).find(animal => animal.id === id);
     }
-    
+
     filterPets(animals, species) {
         return species === 'all' ? animals : animals.filter(animal => animal.species === species);
     }
 
     updateSessionStorage(id, inCart) {
         const currenValues = JSON.parse(sessionStorage.getItem('animals'));
+
         currenValues.forEach(animal => {
             if (animal.id === id) {
                 inCart ? animal.in_cart = true : delete animal.in_cart;
@@ -45,6 +44,7 @@ export class ModelPets {
 
     async getPets(breed = '', species = '') {
         const storageAnimals = sessionStorage.getItem('animals');
+
         if (!storageAnimals) {
             return fetch(this.dbLink)
                 .then(res => res.json())
@@ -57,21 +57,14 @@ export class ModelPets {
                     return this.animals;
                 });
         } else {
-            let tmpAnimals;
-
-            if (breed !== '') {
-                tmpAnimals = JSON.parse(storageAnimals).filter(animal => animal.breed.toLowerCase().includes(breed.toLowerCase()));
-                this.animals = this.filterPets(tmpAnimals, species);
-            } else {
-                tmpAnimals = JSON.parse(storageAnimals);
-                this.animals = this.filterPets(tmpAnimals, species);
-            }
+            const tmpAnimals = breed !== '' ?
+                JSON.parse(storageAnimals).filter(animal => animal.breed.toLowerCase().includes(breed.toLowerCase())) :
+                JSON.parse(storageAnimals);
+            this.animals = this.filterPets(tmpAnimals, species);
             return this.animals;
         }
     }
     calculateAge(now, birthDate) {
-        // const years = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 365);
-        // const months = Math.floor((now.valueOf() - birthDate) / 1000 / 60 / 60 / 24 / 30) % 12;
         const tmp = new Date(now - birthDate);
         const years = tmp.getFullYear() - 1970;
         const months = tmp.getMonth();

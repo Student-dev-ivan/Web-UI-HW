@@ -13,7 +13,6 @@ export class ControllerSearch {
 
     handleSearch(event) {
         if (event.keyCode === 13 || event.target.classList.value === 'search icon') {
-            // this.publish('onSearch', this.view.getInputValue());
             const breed = this.view.getInputValue();
             this.model.updateEnteredBreed(breed);
             this.publish('onSearch', { breed, species: this.model.getSelectedSpecies() });
@@ -30,7 +29,7 @@ export class ControllerSearch {
             // this.view.clearInput();
         }
     }
-    
+
     handleSort(event) {
         const element = event.target;
         let sort = element.dataset.sort;

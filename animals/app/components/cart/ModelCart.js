@@ -19,7 +19,6 @@ export class ModelCart {
         const currentCart = this.getAnimals();
         const animal = JSON.parse(sessionStorage.getItem('animals')).find(animal => animal.id === id);
         currentCart.push(animal);
-        // !currentCart ? JSON.stringify([animal]) : JSON.stringify(currentCart.push(animal));
         sessionStorage.setItem('cart', JSON.stringify(currentCart));
         this.updateTotalAmount(currentCart);
     }

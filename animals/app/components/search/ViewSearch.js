@@ -14,6 +14,7 @@ export class ViewSearch {
     addListeners(searchFunc, filterFunc, sortFunc) {
         document.querySelector('.ui.search').addEventListener('click', searchFunc);
         document.querySelector('.ui.search').addEventListener('keypress', searchFunc);
+        // document.querySelector('.ui.search').addEventListener('focusout', searchFunc);
         document.querySelector('.ui.container.search__menu').addEventListener('click', filterFunc);
         document.querySelector('.ui.container.search__menu').addEventListener('click', sortFunc);
     }
@@ -22,7 +23,7 @@ export class ViewSearch {
         this.domMenu.querySelector('.active').classList.toggle('active');
         element.classList.toggle('active');
     }
-    
+
     getInputValue() {
         return this.input.value.trim();
     }

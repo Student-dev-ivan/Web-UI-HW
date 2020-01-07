@@ -39,7 +39,6 @@ export class ControllerCart {
                 this.view.eraseCart();
                 this.view.updateCartCounter(this.model.getCartItemsCount());
                 this.view.updateCartTotalAmount(this.model.getTotalAmount());
-                console.log(event.target)
                 break;
             case dataset === 'back':
                 this.publish('onBackFromCart', this.model.getCurrentPage());
@@ -51,7 +50,9 @@ export class ControllerCart {
                 const input = this.view.getOrderInput();
                 if (this.isValidInput(input)) {
                     const text = TemplaterCart.getOrderTemplate(input, this.model.getAnimals(), this.model.getTotalAmount());
-                    fetch(`https://api.telegram.org/bot987525486:AAFQf1i1D3p4ZT84cYZTJU1KEk9vg693mlI/sendMessage?chat_id=-377489566&text=${encodeURIComponent(text)}&parse_mode=MarkDown`)
+                    // 477223820 - my chat id
+                    //-377489566 - group id
+                    fetch(`https://api.telegram.org/bot987525486:AAFQf1i1D3p4ZT84cYZTJU1KEk9vg693mlI/sendMessage?chat_id=477223820&text=${encodeURIComponent(text)}&parse_mode=MarkDown`)
                         .then(d => d.json())
                         .then(data => console.log(data));
                     this.model.clearCart();
@@ -72,32 +73,30 @@ export class ControllerCart {
     }
 
     isValidEmail(email) {
-        var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
         return regex.test(email);
     }
     isValidPhone(phone) {
-        return new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im).test(phone.replace(/\s/g, ''));
+        return new RegExp(/^\+?3?8?(0\d{9})$/).test(phone.replace(/\s/g, ''));
     }
-    toggleError(input) {
-        document.querySelector(`[data-input="${input}"]`).classList.toggle('error');
-    }
+
     isValidInput({ name, phone, email, address }) {
         let allValid = true;
-        [...document.querySelectorAll('[data-input]')].forEach((input) => input.classList.toggle('error', false));
+        this.view.toggleFormFieldError();
         if (name === '') {
-            this.toggleError('name');
+            this.view.toggleFormFieldError('name');
             allValid = false;
         }
         if (!this.isValidPhone(phone)) {
-            this.toggleError('phone');
+            this.view.toggleFormFieldError('phone');
             allValid = false;
         }
         if (!this.isValidEmail(email)) {
-            this.toggleError('email');
+            this.view.toggleFormFieldError('email');
             allValid = false;
         }
         if (address === '') {
-            this.toggleError('address');
+            this.view.toggleFormFieldError('address');
             allValid = false;
         }
         return allValid;

@@ -1,7 +1,7 @@
 import { ControllerPets } from './components/pets/ControllerPets.js';
 import { ControllerSearch } from './components/search/ControllerSearch.js';
-import { Publisher } from './share/Publisher.js';
 import { ControllerCart } from './components/cart/ControllerCart.js';
+import { Publisher } from './share/Publisher.js';
 
 
 const publisher = new Publisher();

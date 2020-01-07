@@ -58,7 +58,7 @@ ${display === 'view' ? `<div class="cart_items">${cartItems.map(animal => this.g
     static getCartItemTemplate({ id, image, price, breed }) {
         return `<div class="ui item">
             <div class="ui medium image">
-              <img src="${image}" alt="cat">
+              <img src="${image}" alt="${breed}" onerror="this.onerror = null; this.src='app/assets/no-image.png';">
             </div>
         <div class="info">
             <div class="breed">${breed}</div>

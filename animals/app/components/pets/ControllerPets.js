@@ -98,7 +98,9 @@ export class ControllerPets {
     }
 
     handleSort(sort) {
-        this.model.sortAnimals(sort);
-        this.updatePage(this.model.getCurrentPage());
+        if (this.model.getPagesCount() !== 0) {
+            this.model.sortAnimals(sort);
+            this.updatePage(this.model.getCurrentPage());
+        }
     }
 }

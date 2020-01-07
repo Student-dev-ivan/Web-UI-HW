@@ -56,6 +56,7 @@ export class ViewCart {
 
     eraseCart() {
         this.rootDOM.querySelector('.cart_items').innerHTML = '';
+        this.rootDOM.querySelector('[data-type="order"]').classList.toggle('disabled', true);
     }
 
     getOrderInput() {
@@ -68,5 +69,12 @@ export class ViewCart {
             address: inputValues[3],
             notes: inputValues[4]
         };
+    }
+    toggleFormFieldError(input = 'all') {
+        if (input === 'all') {
+            [...document.querySelectorAll('[data-input]')].forEach((field) => field.classList.toggle('error', false));
+        } else {
+            document.querySelector(`[data-input="${input}"]`).classList.toggle('error');
+        }
     }
 }
