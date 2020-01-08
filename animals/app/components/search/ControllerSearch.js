@@ -31,11 +31,10 @@ export class ControllerSearch {
     }
 
     handleSort(event) {
-        const element = event.target;
-        let sort = element.dataset.sort;
+        const element = event.target.closest('.item');
+        let sort = element === null ? null : element.dataset.sort;
         if (!!sort) {
             sort = sort.split(' ');
-            console.log(sort);
             this.publish('onSort', { field: sort[0], order: sort[1] });
         }
     }
