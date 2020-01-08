@@ -74,7 +74,7 @@ export class TemplaterPets {
         <div class="header">Breed: ${breed}</div>
         <div class="image content">
             <div class="ui large image">
-                <img src="${image} alt="${species}" onerror="this.onerror = null; this.src='app/assets/no-image.png';">
+                <img src="${image}" alt="${species}" onerror="this.onerror = null; this.src='app/assets/no-image.png';">
             </div>
             <div class="description">
                 <div class="info__container">

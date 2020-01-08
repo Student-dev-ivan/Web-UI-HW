@@ -49,13 +49,20 @@ export class ViewCart {
 
     }
 
-    removeItem(element) {
+    removeItem(element, totalAmount) {
         element.closest('.ui.item').nextElementSibling.remove();
         element.closest('.ui.item').remove();
+        if (totalAmount === 0) {
+            this.disableOrderButton();
+        }
     }
 
     eraseCart() {
         this.rootDOM.querySelector('.cart_items').innerHTML = '';
+        this.disableOrderButton();
+    }
+
+    disableOrderButton() {
         this.rootDOM.querySelector('[data-type="order"]').classList.toggle('disabled', true);
     }
 

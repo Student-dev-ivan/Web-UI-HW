@@ -69,7 +69,7 @@ export class ControllerCart {
             return;
         }
         this.publish('onRemoveFromCart', id);
-        this.view.removeItem(element);
+        this.view.removeItem(element, this.model.getTotalAmount());
     }
 
     isValidEmail(email) {
